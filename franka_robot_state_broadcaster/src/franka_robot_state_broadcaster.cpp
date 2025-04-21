@@ -158,7 +158,8 @@ controller_interface::return_type FrankaRobotStateBroadcaster::update(
     return controller_interface::return_type::OK;
 
   } else {
-    return controller_interface::return_type::ERROR;
+    // return controller_interface::return_type::ERROR;
+    return controller_interface::return_type::OK; //to immute errs
   }
 }
 

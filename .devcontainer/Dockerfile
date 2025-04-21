@@ -7,7 +7,7 @@ FROM franka-ros:v0.1.15
 # ARG USER_GID=1001
 # ARG USERNAME=user
 
-# WORKDIR /workspaces
+WORKDIR /franka_ros2_ws
 
 # COPY sources.list /etc/apt/sources.list
 
