@@ -6,6 +6,41 @@ FROM franka-ros:v0.1.15
 # ARG USER_UID=1001
 # ARG USER_GID=1001
 # ARG USERNAME=user
+USER root
+COPY ./nvidia_icd.json /usr/share/vulkan/icd.d/nvidia_icd.json
+COPY ./10_nvidia.json /usr/share/glvnd/egl_vendor.d/10_nvidia.json
+
+RUN apt update
+RUN apt install -y wget zlib1g-dev libssl-dev libncurses5-dev libsqlite3-dev libreadline-dev libtk8.6 libgdm-dev libdb4o-cil-dev libpcap-dev
+RUN apt-get install -y --no-install-recommends software-properties-common && \
+    add-apt-repository universe && \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+        libxcursor-dev \
+        libxrandr-dev \
+        libxinerama-dev \
+        libxi-dev \
+        mesa-common-dev \
+        zip \
+        unzip \
+        make \
+        # vulkan-utils \
+        mesa-vulkan-drivers \
+        pigz \
+        git \
+        libegl1
+
+RUN apt-get install -y \
+        mesa-utils \
+        vulkan-tools
+
+
+RUN apt install -y usbutils vim udev
+RUN /lib/systemd/systemd-udevd --daemon
+
+ENV NVIDIA_VISIBLE_DEVICES=all NVIDIA_DRIVER_CAPABILITIES=all
+
+USER user
 
 WORKDIR /franka_ros2_ws
 
