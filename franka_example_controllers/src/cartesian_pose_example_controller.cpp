@@ -52,6 +52,8 @@ controller_interface::return_type CartesianPoseExampleController::update(
     initialization_flag_ = false;
   }
 
+  RCLCPP_INFO(get_node()->get_logger(),
+                 "=====");
   elapsed_time_ = elapsed_time_ + trajectory_period_;
   double radius = 0.1;
   double angle = M_PI / 4 * (1 - std::cos(M_PI / 5.0 * elapsed_time_));
